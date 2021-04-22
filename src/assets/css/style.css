@@ -1,0 +1,42 @@
+body { /*-webkit-filter: grayscale(100%);*/ /*针对清明等祭奠节日样式*/ }
+button { padding: 2px 6px; background-color: transparent; border: none; outline: none; cursor: pointer; }
+/*button:hover { background-color: #f2f2f2; }*/
+.s_flex {
+    display: -webkit-box;
+    display: -moz-box;
+    display: -webkit-flex;
+    display: -moz-flex;
+    display: -ms-flexbox;
+    display: flex;
+}
+
+.flex_1 {
+    -prefix-box-flex: 1;
+    -webkit-box-flex: 1;
+    -webkit-flex: 1;
+    -moz-box-flex: 1;
+    -ms-flex: 1;
+    flex: 1;
+}
+
+.flex_wrap {
+    flex-wrap: wrap;
+}
+
+.imgSet {
+    font-size: 0px;
+    display: table-cell;
+    text-align: center;
+    vertical-align: middle;
+    position: relative;
+}
+
+.imgSet img {
+    max-width: 100%;
+    max-height: 100%;
+}
+
+/**/
+.editor-form-btn { padding: 20px 20px 0; justify-content: flex-end; }
+.editor-dialog-btn { display: inline-block; line-height: 1; margin-left: 20px; white-space: nowrap; cursor: pointer; background: #fff; border: 1px solid #dcdfe6; color: #606266; -webkit-appearance: none; text-align: center; box-sizing: border-box; outline: none; transition: .1s; font-weight: 500; -moz-user-select: none; -webkit-user-select: none; -ms-user-select: none; padding: 12px 20px; font-size: 14px; border-radius: 4px; }
+.editor-dialog-btn.primary { color: #ffffff; background-color: #409eff; border-color: #409eff; }
