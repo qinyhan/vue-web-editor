@@ -1,13 +1,5 @@
 <template>
     <div class="web-editor" ref="web_editor" :style="{ width: width ? width : '100%', height: height ? height : '100%' }">
-        <!--<div class="web-editor-icons s_flex flex_wrap">
-            <div v-for="(item, index) in menuIcons" :key="index" @click="is_show_icons = true, handleClickMenu(item)">
-                <button>
-                    <em class="iconfont" v-html="item.icon_name"></em>
-                    <input type="file" accept="image/gif, image/jpeg, image/png" ref="editor_upload" v-if="item.type == 'image'" @change="uploadBefore">
-                </button>
-            </div>
-        </div>-->
         <editor-menu :list="menuIcons" ref="menuIconsRef" @click-menu="handleListenMenuTap"></editor-menu>
         <div class="web-editor-content">
             <div class="web-editor-scanner" ref="web_editor_sanner" contenteditable="true" spellcheck="false" v-html="web_editor_desc" :data-content-before="editor_placeholder" v-focus @click="handleSelectText"></div>
@@ -190,7 +182,6 @@
                     }
                 ],
                 web_editor_desc: '附件<p>是</p>的开发<a href="http://www.com" title="img"><img src="https://cdn.toodudu.com/2019/11/12/Aa0rcemgQ6QyOmFyt70PyvvvmHPO9yZ9GntguLKg.png" alt=""></a>建设的克里夫<a href="http://www.com" title="精神科">精神科</a>大夫就是<img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACwAAAApCAYAAABOScuyAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAA3FpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuNS1jMDE0IDc5LjE1MTQ4MSwgMjAxMy8wMy8xMy0xMjowOToxNSAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wTU09Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9tbS8iIHhtbG5zOnN0UmVmPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvc1R5cGUvUmVzb3VyY2VSZWYjIiB4bWxuczp4bXA9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC8iIHhtcE1NOk9yaWdpbmFsRG9jdW1lbnRJRD0ieG1wLmRpZDo5N2UyN2ZhMy04MGU3LWRiNDgtYjQzOC01ZTA2YjNjYWQyNjIiIHhtcE1NOkRvY3VtZW50SUQ9InhtcC5kaWQ6NTZFNUZDQTdCMzU2MTFFOUE0Qzc4OTk4NzMwQkRGREYiIHhtcE1NOkluc3RhbmNlSUQ9InhtcC5paWQ6NTZFNUZDQTZCMzU2MTFFOUE0Qzc4OTk4NzMwQkRGREYiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENDIChXaW5kb3dzKSI+IDx4bXBNTTpEZXJpdmVkRnJvbSBzdFJlZjppbnN0YW5jZUlEPSJ4bXAuaWlkOjU4MmY2YTRmLTdmYzYtNjI0NC05NjRmLTc1ZGM0OTllOTVjZSIgc3RSZWY6ZG9jdW1lbnRJRD0ieG1wLmRpZDo5N2UyN2ZhMy04MGU3LWRiNDgtYjQzOC01ZTA2YjNjYWQyNjIiLz4gPC9yZGY6RGVzY3JpcHRpb24+IDwvcmRmOlJERj4gPC94OnhtcG1ldGE+IDw/eHBhY2tldCBlbmQ9InIiPz4qDNc2AAAB2ElEQVR42mL8//8/w1ACTAxDDDAaGxurAOntQKyCRf4vED8E4t9ArD4A7gPZuxOIM4H4yZkzZxhYgAw/HI4FAWYgVkJyPDOdHcwKxD5ArAvEOkD8BZQkNgHxXSI0Mw9gSpAH4lhYGr4DDWFGLJgTiGcMkuSrQkym+wFKO4PEwZ+JLSWkB4mDnxPrYMVB4uAXxDpYeSiFMCM0hw6ZEBYHYjYo+99QcLDsIKnGPwDxL2IcITNIksNrYkNNbDBlOGIcLDFIHPyIWAdLDhIHPxu2SUJqMJXBxDhYhIB8NRCz42jpEYPZoWZQzcGEkkQPrHwkE4D0TqJWGgbVcLwEDCpBqgnJ7VHkkRLCLHgUCRNhUCsU0xL8AeJPxITwYCkhPhDbzRcZJA5+T6yDhQaJg98Q62C+QeLgS8Q6+NYgcCyoDT6BWAcfAeJjA+hY0KBfIRDfINbBIA1eQLwYiH/S0aGgYuwE1G6MSoWFgOaPQBwHxYMCMKIPt5qYmAy4o0CDfrjAkBtuJdSWmAjEb4H4HZTNRkW7yTIfXxruQmuYgNjfgbiCSg4my3x8IRyLRSyViiFMlvnDKg0vxiI2h4p2k2U+vjRcBu3GxCJZUEtFB5NlPuPotBeNAUCAAQCCb15WdSfi2gAAAABJRU5ErkJggg==">',
-                // web_editor_html: "附件&lt;p&gt;是&lt;/p&gt;的开发&lt;a href='http://www.com' title='img'&gt;&lt;img src='https://cdn.toodudu.com/2019/11/12/Aa0rcemgQ6QyOmFyt70PyvvvmHPO9yZ9GntguLKg.png' alt='&gt;&lt;/a&gt;建设的克里夫&lt;a href='http://www.com' title='精神科'&gt;精神科&lt;/a&gt;大夫就是&lt;img src='data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACwAAAApCAYAAABOScuyAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAA3FpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuNS1jMDE0IDc5LjE1MTQ4MSwgMjAxMy8wMy8xMy0xMjowOToxNSAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wTU09Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9tbS8iIHhtbG5zOnN0UmVmPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvc1R5cGUvUmVzb3VyY2VSZWYjIiB4bWxuczp4bXA9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC8iIHhtcE1NOk9yaWdpbmFsRG9jdW1lbnRJRD0ieG1wLmRpZDo5N2UyN2ZhMy04MGU3LWRiNDgtYjQzOC01ZTA2YjNjYWQyNjIiIHhtcE1NOkRvY3VtZW50SUQ9InhtcC5kaWQ6NTZFNUZDQTdCMzU2MTFFOUE0Qzc4OTk4NzMwQkRGREYiIHhtcE1NOkluc3RhbmNlSUQ9InhtcC5paWQ6NTZFNUZDQTZCMzU2MTFFOUE0Qzc4OTk4NzMwQkRGREYiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENDIChXaW5kb3dzKSI+IDx4bXBNTTpEZXJpdmVkRnJvbSBzdFJlZjppbnN0YW5jZUlEPSJ4bXAuaWlkOjU4MmY2YTRmLTdmYzYtNjI0NC05NjRmLTc1ZGM0OTllOTVjZSIgc3RSZWY6ZG9jdW1lbnRJRD0ieG1wLmRpZDo5N2UyN2ZhMy04MGU3LWRiNDgtYjQzOC01ZTA2YjNjYWQyNjIiLz4gPC9yZGY6RGVzY3JpcHRpb24+IDwvcmRmOlJERj4gPC94OnhtcG1ldGE+IDw/eHBhY2tldCBlbmQ9InIiPz4qDNc2AAAB2ElEQVR42mL8//8/w1ACTAxDDDAaGxurAOntQKyCRf4vED8E4t9ArD4A7gPZuxOIM4H4yZkzZxhYgAw/HI4FAWYgVkJyPDOdHcwKxD5ArAvEOkD8BZQkNgHxXSI0Mw9gSpAH4lhYGr4DDWFGLJgTiGcMkuSrQkym+wFKO4PEwZ+JLSWkB4mDnxPrYMVB4uAXxDpYeSiFMCM0hw6ZEBYHYjYo+99QcLDsIKnGPwDxL2IcITNIksNrYkNNbDBlOGIcLDFIHPyIWAdLDhIHPxu2SUJqMJXBxDhYhIB8NRCz42jpEYPZoWZQzcGEkkQPrHwkE4D0TqJWGgbVcLwEDCpBqgnJ7VHkkRLCLHgUCRNhUCsU0xL8AeJPxITwYCkhPhDbzRcZJA5+T6yDhQaJg98Q62C+QeLgS8Q6+NYgcCyoDT6BWAcfAeJjA+hY0KBfIRDfINbBIA1eQLwYiH/S0aGgYuwE1G6MSoWFgOaPQBwHxYMCMKIPt5qYmAy4o0CDfrjAkBtuJdSWmAjEb4H4HZTNRkW7yTIfXxruQmuYgNjfgbiCSg4my3x8IRyLRSyViiFMlvnDKg0vxiI2h4p2k2U+vjRcBu3GxCJZUEtFB5NlPuPotBeNAUCAAQCCb15WdSfi2gAAAABJRU5ErkJggg=='&gt;",
                 web_editor_html: '',
                 //  是否开启下拉
                 is_open_down: false,
@@ -480,10 +471,6 @@
             },
             /** 点击右侧菜单设置 **/
             clickRightMenuItem (type) {
-                /*if (type == 'upload') {
-                    //  触发上传图片的点击事件
-                    this.$refs.editor_upload.dispatchEvent(new MouseEvent('click'))
-                }*/
                 switch (type) {
                     case 'upload':
                         //  触发上传图片的点击事件
