@@ -90,7 +90,7 @@
     import SourceCodeView from "../../components/source/SourceCodeView";
 
     export default {
-        name: 'web-editor',
+        name: 'vue-web-editor',
         data() {
             return {
                 width: 'auto',

@@ -3,3 +3,12 @@
 node_modules/
 webpack.config.js
 src/
+/dist
+/lib
+/src
+/packages
+/public
+vue.config.js
+babel.config.js
+*.map
+*.html

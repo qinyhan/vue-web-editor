@@ -1,53 +1,66 @@
 {
-  "name": "vue-web-editor",
-  "version": "0.1.0",
-  "private": true,
-  "scripts": {
-    "dev": "vue-cli-service serve --mode dev",
-    "serve": "vue-cli-service serve",
-    "build": "vue-cli-service build",
-    "lint": "vue-cli-service lint"
-  },
-  "dependencies": {
-    "core-js": "^3.6.5",
-    "vue": "^2.6.11",
-    "vue-router": "^3.2.0"
-  },
-  "devDependencies": {
-    "@vue/cli-plugin-babel": "~4.5.0",
-    "@vue/cli-plugin-eslint": "~4.5.0",
-    "@vue/cli-service": "~4.5.0",
-    "babel-eslint": "^10.1.0",
-    "codemirror": "^5.60.0",
-    "css-loader": "^5.2.0",
-    "eslint": "^6.7.2",
-    "eslint-plugin-vue": "^6.2.2",
-    "html-webpack-plugin": "^4.5.2",
-    "node-sass": "^5.0.0",
-    "preload-webpack-plugin": "^2.3.0",
-    "sass": "^1.32.8",
-    "sass-loader": "^9.0.0",
-    "style-loader": "^2.0.0",
-    "vue-loader": "^15.9.6",
-    "vue-template-compiler": "^2.6.11"
-  },
-  "eslintConfig": {
-    "root": true,
-    "env": {
-      "node": true
-    },
-    "extends": [
-      "plugin:vue/essential",
-      "eslint:recommended"
+    "name": "vue-web-editor",
+    "version": "1.1.0",
+    "private": false,
+    "main": "src/index.js",
+    "author": "yasheng",
+    "license": "MIT",
+    "description": "This is a rich text editor generated using Vue scaffolding",
+    "keywords": [
+        "vue",
+        "editor",
+        "vue-editor",
+        "web-editor",
+        "vue-web-editor",
+        "web"
     ],
-    "parserOptions": {
-      "parser": "babel-eslint"
+    "scripts": {
+        "dev": "vue-cli-service serve --mode dev",
+        "npm-build": "vue-cli-service build --target lib --name vue-web-editor --dest lib src/index.js",
+        "serve": "vue-cli-service serve",
+        "build": "vue-cli-service build",
+        "lint": "vue-cli-service lint"
     },
-    "rules": {}
-  },
-  "browserslist": [
-    "> 1%",
-    "last 2 versions",
-    "not dead"
-  ]
+    "dependencies": {
+        "core-js": "^3.6.5",
+        "vue": "^2.6.11",
+        "vue-router": "^3.2.0"
+    },
+    "devDependencies": {
+        "@vue/cli-plugin-babel": "~4.5.0",
+        "@vue/cli-plugin-eslint": "~4.5.0",
+        "@vue/cli-service": "~4.5.0",
+        "babel-eslint": "^10.1.0",
+        "codemirror": "^5.60.0",
+        "css-loader": "^5.2.0",
+        "eslint": "^6.7.2",
+        "eslint-plugin-vue": "^6.2.2",
+        "html-webpack-plugin": "^4.5.2",
+        "node-sass": "^5.0.0",
+        "preload-webpack-plugin": "^2.3.0",
+        "sass": "^1.32.8",
+        "sass-loader": "^9.0.0",
+        "style-loader": "^2.0.0",
+        "vue-loader": "^15.9.6",
+        "vue-template-compiler": "^2.6.11"
+    },
+    "eslintConfig": {
+        "root": true,
+        "env": {
+            "node": true
+        },
+        "extends": [
+            "plugin:vue/essential",
+            "eslint:recommended"
+        ],
+        "parserOptions": {
+            "parser": "babel-eslint"
+        },
+        "rules": {}
+    },
+    "browserslist": [
+        "> 1%",
+        "last 2 versions",
+        "not dead"
+    ]
 }
